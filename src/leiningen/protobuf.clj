@@ -7,7 +7,8 @@
   (:require [clojure.java.io :as io]
             [fs.core :as fs]
             [fs.compression :as fs-zip]
-            [conch.core :as sh]))
+            [conch.core :as sh])
+  (:import (java.io File)))
 
 (def cache (io/file (leiningen-home) "cache" "lein-protobuf"))
 (def default-version "2.6.1")
@@ -21,7 +22,7 @@
 (defn srcdir [project]
   (io/file cache (str "protobuf-" (version project))))
 
-(defn protoc [project]
+(defn protoc-file [project]
   (io/file (srcdir project) "src" "protoc"))
 
 (defn url [project]
@@ -98,7 +99,7 @@
   "Compile protoc from source."
   [project]
   (let [srcdir (srcdir project)
-        protoc (protoc project)]
+        protoc (protoc-file project)]
     (when-not (.exists protoc)
       (fetch project)
       (fs/chmod "+x" (io/file srcdir "autogen.sh"))
@@ -122,7 +123,7 @@
            class-dest (io/file target "classes")
            proto-dest (io/file target "proto")
            proto-path (proto-path project)
-           protoc (or (protoc project) proto-path)]
+           protoc (or (protoc project) (.getPath ^File (or (protoc-file project) proto-path)))]
        (when (or (> (modtime proto-path) (modtime dest))
                  (> (modtime proto-path) (modtime class-dest)))
          (binding [*compile-protobuf?* false]

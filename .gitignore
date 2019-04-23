@@ -1,5 +1,7 @@
 .lein-deps-sum
+.idea/
 .lein-failures
+*.iml
 *~
 lib
 classes
