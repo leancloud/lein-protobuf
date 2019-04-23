@@ -12,4 +12,5 @@
   ;; jar to implicitly clean no matter what, wiping stuff.
   ;; This prevents that.
   :disable-implicit-clean true
+  :deploy-repositories {"releases" :clojars}
   :checksum-deps true)
