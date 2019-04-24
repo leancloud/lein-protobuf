@@ -1,4 +1,4 @@
-(ns lein-protobuf.plugin
+(ns leancloud-lein-protobuf.plugin
   (:use [leiningen.javac :only [javac]]
         [leiningen.protobuf :only [protobuf *compile-protobuf?*]]
         [robert.hooke :only [add-hook]]))

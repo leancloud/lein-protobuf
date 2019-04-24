@@ -1,4 +1,4 @@
-(defproject leancloud-lein-protobuf "0.5.1"
+(defproject leancloud-lein-protobuf "0.5.2"
   :description "Leiningen plugin for compiling protocol buffers."
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
